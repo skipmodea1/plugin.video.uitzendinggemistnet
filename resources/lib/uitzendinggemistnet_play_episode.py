@@ -142,31 +142,35 @@ class Main(object):
             json_source = response.text
             json_source = convertToUnicodeString(json_source)
 
-            # log("json_source", json_source)
+            log("json_source", json_source)
 
             #{"canPlay":true,"manifest":"https://cdn-rtlvod-h4.akamaized.net/d126579c-7897-4396-bf0d-e9913da04cf9/4cf1064e-7c33-33c5-a6d4-9baea9f515c7.ism/manifest(format=m3u8-aapl,encryption=cbc,Filter=Quality)","token":"eyJhbGciOiJSUzI1NiIsImtpZCI6IkRGMUEwNzYwODRFRTE4NDM5NTYwMjdCM0UxODIxMkZBRTA0OUM3NTgiLCJ0eXAiOiJKV1QifQ.eyJ1dWlkIjoiNGNmMTA2NGUtN2MzMy0zM2M1LWE2ZDQtOWJhZWE5ZjUxNWM3IiwidGVuYW50IjoiWGwiLCJuYmYiOjE1NzgwNzI2MzYsImV4cCI6MTU3ODA3NjIzNiwiaWF0IjoxNTc4MDcyNjM2LCJpc3MiOiJodHRwczovL2VudGl0bGVtZW50LnJ0bC5ubCIsImF1ZCI6IlJUTCJ9.OzRTzM7kfCYcU-nIe8L3uzeDnYfJFKog8gmlQh3IUmqoxxY5pcjG8lZe_HloxJJBTRbQDAhFG3f6yiwDzCg_bLYY0QvpiS_gpsKBaTyVZ9KxMi7mq5vcD1eGAL6jaOXNzmrm68zJ0ufNlPZ5dAzIcYABWfLqBH9C-iVr8lHAW6jfrtHqRvIV3r2-lezI5_qhxNThR6NyEjO7WvRdTqdBbMpa7_eVLTpvzFdtc-UKrRNViPPaTAKwMHEssjYkjwEvBkvoSRQZy-P9ahqq4B5KGo9x03kIUFXd5XgbMT4rMli_hTmRQDFBrt5Mo5JRApVp1x7BgiAJqAFvQk0zDvWnsA","kid":"1e444b87-1beb-431e-ae3c-4463bdbf2dcd","licenseUrl":"https://api.rtl.nl/watch/license/aes/?kid=1e444b87-1beb-431e-ae3c-4463bdbf2dcd"}
 
             data = json.loads(json_source)
 
-            can_play = data["canPlay"]
-
-            # log("cp", can_play)
+            # can_play = data["canPlay"]
+            #
+            # log("can_play", can_play)
 
             manifest_url = data["manifest"]
 
-            # log("mu", manifest_url)
+            # log("manifest_url", manifest_url)
 
-            if can_play:
-                have_valid_url = True
-                unplayable_media_file = False
-                video_url = manifest_url
-            else:
+            have_valid_url = True
+            unplayable_media_file = False
+            video_url = manifest_url
 
-                log("skipping video that cannot be played", manifest_url)
-
-                have_valid_url = False
-                video_unavailable = True
-                video_url = ""
+            # if can_play:
+            #     have_valid_url = True
+            #     unplayable_media_file = False
+            #     video_url = manifest_url
+            # else:
+            #
+            #     log("skipping video that cannot be played", manifest_url)
+            #
+            #     have_valid_url = False
+            #     video_unavailable = True
+            #     video_url = ""
 
         log("have_valid_url", have_valid_url)
 
