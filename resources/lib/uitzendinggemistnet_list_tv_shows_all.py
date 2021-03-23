@@ -127,14 +127,14 @@ class Main(object):
 
             title = tv_show["title"]
 
-            if self.show_channel == "True":
-                channel = tv_show.select('img')[1]["alt"]
-
-                log("channel", channel)
-
-                channel = str(channel).replace("Nederland", "NL ")
-
-                title = channel + ": " + title
+            # if self.show_channel == "True":
+            #     channel = tv_show.select('img')[1]["alt"]
+            #
+            #     log("channel", channel)
+            #
+            #     channel = str(channel).replace("Nederland", "NL ")
+            #
+            #     title = channel + ": " + title
 
             log("title", title)
 

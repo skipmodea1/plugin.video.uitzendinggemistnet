@@ -130,14 +130,17 @@ class Main(object):
                 except:
                     title = ""
 
-            if self.show_channel == "True":
-                channel = item.select('img')[1]["alt"]
+            # <div class="kr_blok_main" style="height: 320px;"><h3 class="kr_blok_title"><a href="https://www.uitzendinggemist.net/aflevering/548525/Ik_Vertrek.html" title="Ik Vertrek">Ik Vertrek</a></h3><div class="kr_blok_thumb"><a href="https://www.uitzendinggemist.net/aflevering/548525/Ik_Vertrek.html" title="Ik Vertrek - Familie Knops - Spanje, Malaga"><img alt="Ik Vertrek - Familie Knops - Spanje, Malaga" height="102" src="https://images.npo.nl/header/1280x720/1540637.jpg" width="180"/></a></div><p class="kr_blok_subtitle">Familie Knops - Spanje, Malaga</p><p class="kr_blok_desc">Personeelsadviseur Mascha (48) is geboren en getogen in het Brabantse Berkel-Enschot. Ze woont al jaren binnen een straal van 500 met
+            # er van haar ouders vandaan. &amp;#039;Ons pa ... </p><p class="kr_blok_date">23-03-2021</p><p class="kr_blok_host">TROS</p><p class="kr_blok_more"><a href="https://www.uitzendinggemist.net/programmas/328-Ik_Vertrek.html" title="Ik Vertrek Gemist">Alle afleveringen bekijken</a></p><p class="icon"><a href="https://www.uitzendinggemist.net/zenders/Nederland-2.html" title="Nederland 2"><img alt="Nederland 2" border="0" height="18" src="https://www.uitzendinggemist.net/images/nederland-2-xs.png" width="20"/></a></p></div>
 
-                log("channel", channel)
-
-                channel = str(channel).replace("Nederland", "NL ")
-
-                title = channel + ": " + title
+            # if self.show_channel == "True":
+            #     channel = item.select('img')[1]["alt"]
+            #
+            #     log("channel", channel)
+            #
+            #     channel = str(channel).replace("Nederland", "NL ")
+            #
+            #     title = channel + ": " + title
 
             log("title", title)
 

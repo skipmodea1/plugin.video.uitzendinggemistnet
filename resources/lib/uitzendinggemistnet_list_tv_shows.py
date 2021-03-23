@@ -93,6 +93,9 @@ class Main(object):
 
             #<div class="kr_blok_main" style="height: 270px;"><h3 class="kr_blok_title">Chateau Meiland </h3><div class="kr_blok_thumb"><a href="https://www.uitzendinggemist.net/programmas/59250-Chateau_Meiland.html"><img alt="Chateau Meiland " height="102" src="https://img.kijk.nl/media/cache/computer_retina_series_program_header/imgsrc06/images/redactioneel/1085720-LS---20190520112813--0e03ad5aaa47df615ea8e4d6f1204dbd.jpg" width="180"/></a></div><div class="kr_blok_desc">Martien en Erica gaan opnieuw het huwelijksbootje in</div><p class="icon"><a href="https://www.uitzendinggemist.net/zenders/SBS-6.html" title="SBS 6"><img alt="SBS 6" border="0" height="18" src="https://www.uitzendinggemist.net/images/sbs-6-xs.png" width="20"/></a></p></div>
 
+            #<div class="kr_blok_main" style="height: 270px;"><h3 class="kr_blok_title">Jinek</h3><div class="kr_blok_thumb"><a href="https://www.uitzendinggemist.net/programmas/83421-Jinek.html"><img alt="Jinek" height="102" src="https://covers.rtl.nl/system/cover/l/thumb/506903" width="180"/></a></div><div class="kr_blok_desc">Dagelijkse talkshow waarin Eva Jinek met de hoofdrolspelers uit de actualiteit het gesprek van de dag voert. Journalistiek, scherp, onderhoudend en over onderwerpen uit de media ...</div><p class="icon"><a href="https://www.uitzendinggemist.net/zenders/RTL-4.html" title="RTL 4"><img alt="RTL 4" border="0" height="18" src="https://www.uitzendinggemist.net/images/rtl-4-xs.png" width="20"/></a></p></div>
+
+            title = ""
             try:
                 title_part1 = tv_show.a['title']
                 log("tp1", title_part1)
@@ -108,14 +111,25 @@ class Main(object):
                 except:
                     title = ""
 
-            if self.show_channel == "True":
-                channel = tv_show.select('img')[1]["alt"]
+            # let's monkeywrench it then
+            if title == "":
+                search_for_string = 'kr_blok_title">'
+                start_pos_title = str(tv_show).find(search_for_string)
+                if start_pos_title >= 0:
+                    start_pos_title = start_pos_title + len(search_for_string)
+                    end_pos_title = str(tv_show).find("<", start_pos_title)
+                    log("start_pos_title", start_pos_title)
+                    log("end_pos_title", end_pos_title)
+                    title = str(tv_show)[start_pos_title:end_pos_title]
 
-                log("channel", channel)
-
-                channel = str(channel).replace("Nederland", "NL ")
-
-                title = channel + ": " + title
+            # if self.show_channel == "True":
+            #     channel = tv_show.select('img')[1]["alt"]
+            #
+            #     log("channel", channel)
+            #
+            #     channel = str(channel).replace("Nederland", "NL ")
+            #
+            #     title = channel + ": " + title
 
             log("title", title)
 
