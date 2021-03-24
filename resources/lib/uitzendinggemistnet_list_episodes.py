@@ -133,33 +133,63 @@ class Main(object):
             # <div class="kr_blok_main" style="height: 320px;"><h3 class="kr_blok_title"><a href="https://www.uitzendinggemist.net/aflevering/548525/Ik_Vertrek.html" title="Ik Vertrek">Ik Vertrek</a></h3><div class="kr_blok_thumb"><a href="https://www.uitzendinggemist.net/aflevering/548525/Ik_Vertrek.html" title="Ik Vertrek - Familie Knops - Spanje, Malaga"><img alt="Ik Vertrek - Familie Knops - Spanje, Malaga" height="102" src="https://images.npo.nl/header/1280x720/1540637.jpg" width="180"/></a></div><p class="kr_blok_subtitle">Familie Knops - Spanje, Malaga</p><p class="kr_blok_desc">Personeelsadviseur Mascha (48) is geboren en getogen in het Brabantse Berkel-Enschot. Ze woont al jaren binnen een straal van 500 met
             # er van haar ouders vandaan. &amp;#039;Ons pa ... </p><p class="kr_blok_date">23-03-2021</p><p class="kr_blok_host">TROS</p><p class="kr_blok_more"><a href="https://www.uitzendinggemist.net/programmas/328-Ik_Vertrek.html" title="Ik Vertrek Gemist">Alle afleveringen bekijken</a></p><p class="icon"><a href="https://www.uitzendinggemist.net/zenders/Nederland-2.html" title="Nederland 2"><img alt="Nederland 2" border="0" height="18" src="https://www.uitzendinggemist.net/images/nederland-2-xs.png" width="20"/></a></p></div>
 
-            # if self.show_channel == "True":
-            #     channel = item.select('img')[1]["alt"]
-            #
-            #     log("channel", channel)
-            #
-            #     channel = str(channel).replace("Nederland", "NL ")
-            #
-            #     title = channel + ": " + title
+            if self.show_channel == "True":
+                channel = item.select('img')[1]["alt"]
+
+                log("channel", channel)
+
+                channel = str(channel).replace("Nederland", "NL ")
+
+                title = channel + ": " + title
 
             log("title", title)
 
+            #<div class="kr_blok_main" style="height: 320px;"><h3 class="kr_blok_title">
+            #<a class="iframe2_Removethis" href="https://www.uitzendinggemist.net/aflevering/529559/Jinek.html" title="Afl. 28">Afl. 28</a>
+            #</h3><div class="kr_blok_thumb"><a class="iframe_Removethis" href="https://www.uitzendinggemist.net/aflevering/529559/Jinek.html" title="Jinek - Afl. 28">
+            #<img alt="Jinek - Afl. 28" height="102" src="https://screenshots.rtl.nl/system/thumb/sz=355x200/uuid=4e8342ea-65a1-4450-bf1e-c8fd6d0e02fb" width="180"/>
+            #</a></div>
+            #<p class="kr_blok_desc">Met in deze uitzending: -Patricia Bruijning, Sven Kockelmann en Jesse Klaver over het toenemende aantal coronabesmettingen in Nederland. -Evi Hanssen heeft de levenslessen die z ... </p>
+            #<p class="kr_blok_date">23-09-2020</p><p class="kr_blok_host">RTL4</p><p class="kr_blok_more"><a href="https://www.uitzendinggemist.net/programmas/83421-Jinek.html" title="Jinek Gemist">Alle afleveringen bekijken</a></p><p class="icon">
+            #<a href="https://www.uitzendinggemist.net/zenders/RTL-4.html" title="RTL 4">
+            #<img alt="RTL 4" border="0" height="18" src="https://www.uitzendinggemist.net/images/rtl-4-xs.png" width="20"/></a></p></div>
+
+            if self.show_channel == "True":
+                try:
+                    channel = item.select('img')[1]["alt"]
+
+                    log("channel", channel)
+
+                    channel = str(channel).replace("Nederland", "NL ")
+
+                    title = channel + ": " + title
+                except:
+                    pass
             try:
                 # Get the text of the second p-tag
-                plot = item.select('p')[1].get_text(strip=True)
+                plot_date = item.select('p')[1].get_text(strip=True)
             except:
                 try:
                     # Get the text of the second div-tag
-                    plot = item.select('div')[1].get_text(strip=True)
+                    plot_date = item.select('div')[1].get_text(strip=True)
                 except:
-                    plot = ""
+                    plot_date = ""
+
+            log("plot_date", plot_date)
+
+            plot = ""
+            try:
+                # Get the text of the second p-tag
+                plot = item.select('p')[0].get_text(strip=True)
+            except:
+                plot = ""
 
             log("plot", plot)
 
-            if title == "":
-                pass
-            else:
-                title = title + " (" + plot + ")"
+            # if title == "":
+            #     pass
+            # else:
+            title = title + " (" + plot_date + ": " + plot + ")"
 
             log("title", title)
 
@@ -174,7 +204,7 @@ class Main(object):
             # Add to list...
             list_item = xbmcgui.ListItem(label=title, thumbnailImage=thumbnail_url)
             list_item.setInfo("video", {"title": title, "studio": ADDON, "mediatype": "video",
-                              "plot": plot})
+                              "plot": plot_date})
             list_item.setArt({'thumb': thumbnail_url, 'icon': thumbnail_url,
                               'fanart': os.path.join(IMAGES_PATH, 'fanart-blur.jpg')})
             list_item.setProperty('IsPlayable', 'true')

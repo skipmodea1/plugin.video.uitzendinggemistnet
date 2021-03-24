@@ -127,15 +127,18 @@ class Main(object):
 
             title = tv_show["title"]
 
-            # if self.show_channel == "True":
-            #     channel = tv_show.select('img')[1]["alt"]
-            #
-            #     log("channel", channel)
-            #
-            #     channel = str(channel).replace("Nederland", "NL ")
-            #
-            #     title = channel + ": " + title
+            if self.show_channel == "True":
+                try:
+                    channel = tv_show.select('img')[1]["alt"]
 
+                    log("channel", channel)
+
+                    channel = str(channel).replace("Nederland", "NL ")
+
+                    title = channel + ": " + title
+                except:
+                    pass
+                
             log("title", title)
 
             context_menu_items = []
