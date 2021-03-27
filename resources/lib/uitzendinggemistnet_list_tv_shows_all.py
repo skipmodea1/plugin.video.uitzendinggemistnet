@@ -138,7 +138,7 @@ class Main(object):
                     title = channel + ": " + title
                 except:
                     pass
-                
+
             log("title", title)
 
             context_menu_items = []
